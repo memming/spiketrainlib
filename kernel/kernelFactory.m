@@ -259,9 +259,9 @@ switch lower(kernelName)
         kernelStruct.autoParam = @(ks,sts)(autoKernelSizeScalar(@kernelStruct.stmetric, sts));
     case {'spike-align-kernel', 'seth2011b'}
 	kernelStruct.name = 'Spike alignment kernel';
-	kernelStruct.isPSD = 0;
+	kernelStruct.isPSD = false;
 	kernelStruct.isHermitian = true;
-	kernelStruct.isSPD = 0;
+	kernelStruct.isSPD = false;
         kernelStruct.kernel = @spikeAlignKernel;
         kernelStruct.autoParam = @(ks,sts)(autoKernelSizeScalar(@pairwiseL1, sts));
     case { 'normalized-spike-align-kernel', 'normalized-seth2011b', 'n-seth2011b'}
@@ -269,9 +269,9 @@ switch lower(kernelName)
     	kernelStruct.name = 'Normalized spike alignment kernel';
     case {'spike-align-kernel-isi', 'spike-align-kernel-2', 'seth2011c'}
 	kernelStruct.name = 'Spike alignment kernel ISI';
-	kernelStruct.isPSD = 0;
+	kernelStruct.isPSD = false;
 	kernelStruct.isHermitian = true;
-	kernelStruct.isSPD = 0;
+	kernelStruct.isSPD = false;
         kernelStruct.kernel = @spikeAlignKernel2;
         kernelStruct.nParams = 1;
 	% TODO pairwiseL1 could be all zeros => Inf kernel size problem

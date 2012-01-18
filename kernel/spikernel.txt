@@ -1,0 +1,3 @@
+Spikernel implemented in C is available from spider package (http://people.kyb.tuebingen.mpg.de/spider/index.html) which is under GPLv3. Due to licence conflict, we do not include this in the source tree nor distribution.
+
+To use spikernel, (1) download spider (tested 1.71), (2) copy spider/function/fspike.* as well as spider/function/Fspike.m into this directory, and (3) compile fspike.cpp with mex if necessary.

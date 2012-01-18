@@ -228,6 +228,11 @@ switch lower(kernelName)
 	%   Lavi Shpigelman, Yoram Singer, Rony Paz and Eilon Vaadia
 	%   Advances in Neural Information Processing Systems (NIPS) 15
 	%   MIT Press, Cambridge, MA, 2003.
+	
+	if ~exist('Fspike.m')
+	    kernelStruct = [];
+	    return
+	end
 	kernelStruct.name = 'spikernel';
 	kernelStruct.desc = '(Shpigelman et al. NC 2003)';
 	kernelStruct.isPSD = true;
@@ -270,7 +275,7 @@ switch lower(kernelName)
         kernelStruct.kernel = @spikeAlignKernel2;
         kernelStruct.nParams = 1;
 	% TODO pairwiseL1 could be all zeros => Inf kernel size problem
-        kernelStruct.autoParam = @(ks,sts)(autoKernelSizeScalar(@(x,y)(1./pairwiseL1(x,y)), sts));
+        kernelStruct.autoParam = @(ks,sts)(autoKernelSizeScalar(@(x,y)(1./(eps+pairwiseL1(x,y))), sts));
     case { 'normalized-spike-align-kernel-2', 'normalized-spike-align-kernel-isi', 'normalized-seth2011c', 'n-seth2011c'}
 	kernelStruct = getNormalizedKernel('seth2011c', T, param1, param2);
     	kernelStruct.name = 'Normalized spike alignment kernel ISI';

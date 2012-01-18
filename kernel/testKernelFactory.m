@@ -210,13 +210,17 @@ assertRange(ks.kernel(ks,1,1,1), 1, 'K(0)');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ks = kernelFactory('spikernel', T, 'Gaussian');
-ksizeList = ks.autoParam(ks, sts)
-for cidx = 1:size(ksizeList,1)
-    K = computeKernelMatrix(ks, sts, ksizeList{cidx})
+if ~isempty(ks) % spikernel is installed
+    ksizeList = ks.autoParam(ks, sts)
+    for cidx = 1:size(ksizeList,1)
+	K = computeKernelMatrix(ks, sts, ksizeList{cidx})
+    end
+    assertRange(norm(K - K'), 1e-30, 'not symmetric!');
+    EV = eig(K);
+    assert(min(EV) >= 0, sprintf('not positive definite!! %f', min(EV)));
+else
+    fprintf('Spikernel is not installed. See spikernel.txt for details\n');
 end
-assertRange(norm(K - K'), 1e-30, 'not symmetric!');
-EV = eig(K);
-assert(min(EV) >= 0, sprintf('not positive definite!! %f', min(EV)));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ks = kernelFactory('metric-pseudo', T, {'vp', 1}, 'laplacian');

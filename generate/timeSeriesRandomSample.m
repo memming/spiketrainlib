@@ -17,8 +17,6 @@ function [subsamples, targets, sts, temporalWindow] = timeSeriesRandomSample(x, 
 %   targets: samples of x obtained at rounded subsample times
 %   sts: samples of spike trains obtained in [-temporalWindow 0] + subsamples
 %   temporalWindow: length of the temporal window that is used
-%
-% $Id: timeSeriesRandomSample.m 94 2011-11-03 14:45:16Z memming $
 
 if nargin < 6; isRandom = true; end
 

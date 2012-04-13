@@ -111,6 +111,7 @@ switch lower(kernelName)
         kernelStruct.K = scalarKernelFactory(param1);
         kernelStruct.autoParam = @(ks,sts)(autoKernelSize2(...
             @pairwiseL1, @nci1_autoInner, sts));
+	kernelStruct.nParams = 2;
     case {'gnci1'}
         kernelStruct.innerKS = param2;
         kernelStruct.name = ['gnCI1 [' kernelStruct.innerKS.name ']'];

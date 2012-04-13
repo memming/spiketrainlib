@@ -10,7 +10,7 @@ nMC = 100;
 alpha = 0.05;
 
 if true % fast run for debugging <==!!
-    nMC = 3; nList = [30 50];
+    nMC = 3; nList = [30 60];
     kernelList = {'count', 'mci', 'nci1', 'nci2'};
     verbose = true;
 else

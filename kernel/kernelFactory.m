@@ -230,7 +230,7 @@ switch lower(kernelName)
 	%   Advances in Neural Information Processing Systems (NIPS) 15
 	%   MIT Press, Cambridge, MA, 2003.
 	
-	if ~exist('Fspike.m')
+	if ~exist('Fspikernel.m')
 	    kernelStruct = [];
 	    return
 	end

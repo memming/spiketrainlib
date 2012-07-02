@@ -1,7 +1,17 @@
 function KM = computeKernelMatrix(kernelStruct, sts, ksize, sts2)
+% KM = computeKernelMatrix(kernelStruct, sts, ksize, sts2)
 % Computes the kernel matrix.
+%
+% Input:
+%   kernelStruct: kernel structure (obtained via kernelFactory)
+%   sts: cell array of spike trains
+%   ksize: kernel size vector
+%   sts2: (optional) if given computes KM(k1, k2) = ks.kernel(sts{k1}, sts{k2});
+% Output:
+%   KM: kernel matrix
+%
 % For certain kernels, the kernelStructure has a method 'KM' which could be
-% faster. Otherwise it is O(n^2).
+% faster (automatically called). Otherwise it is O(n^2).
 %
 % Copyright 2010-2012 Memming
 

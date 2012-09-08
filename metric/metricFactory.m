@@ -1,7 +1,11 @@
 function [metric] = metricFactory(metricParam)
+% [metric] = metricFactory(metricParam);
 % Returns a spike train metric function handle @(st1, st2) -> non-neg real
 %
-% $Id: metricFactory.m 24 2011-01-11 22:49:14Z memming $
+% Input:
+%    metricParam: cell array of paramters. 
+%	First is the name of the distance: VP or DSM
+%	The rest are usually real valued parameters. q for VP, p and q for DSM
 %
 % Copyright 2011 Memming. All rights reserved.
 
@@ -36,7 +40,7 @@ function d = dsm_metric(X,Y,p,q)
 %   X: spike timings
 %   Y: spike timings
 %   p: L-p distance (p = 1 is the Victor-Purpura metric)
-%   q: 
+%   q: cost of moving a spike by a unit distance in time
 %
 % Ref: Alexander J. Dubbs, Brad A. Seiler and Marcelo O. Magnasco,
 % A Fast Lp Spike Alignment Metric, Neural Computation 22 (2010): 2785--2808

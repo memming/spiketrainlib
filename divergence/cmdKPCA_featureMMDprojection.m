@@ -3,7 +3,7 @@
 % It would be better to compute MMD for each PC direction
 % and display the ones with highests difference.
 
-expNum = 3;
+expNum = 10;
 kernelList = {'mci', 'nci1', 'spikernel'}; %'stratified Poisson scaling';
 
 N = 6 * 32; % number of samples per class (total data = 2*N)

@@ -1,4 +1,4 @@
-function spikeTrains = genPTST(N, M, param)
+function [spikeTrains param] = genPTST(N, M, param)
 % experiment- Precisely Timed Spike Train (PTST) vs equivalent Poisson process
 % spikeTrains = genPTST(N, M, param)
 %
@@ -40,18 +40,21 @@ T = param.T; % total duration
 
 if ~isfield(param, 'mu') % The mean position of APs
     mu = rand(L, 1) * T/2 + T/4;
+    param.mu = mu;
 else
     mu = param.mu;
 end
 
 if ~isfield(param, 'sigma') % The std of each AP
     sigma = rand(L, 1) * 0.010 + 0.001;
+    param.sigma = sigma;
 else
     sigma = param.sigma;
 end
 
 if ~isfield(param, 'p') % Probability of NOT lossing each AP
     p = 1 - 0.5 * rand(L, 1);
+    param.p = p;
 else
     p = param.p;
 end
@@ -59,6 +62,7 @@ end
 if ~isfield(param, 'lambda') 
     % mean number of spikes for the additive homogeneous Poisson noise
     lambda = 0;
+    param.lambda = lambda;
 else
     lambda = param.lambda;
 end

@@ -23,11 +23,8 @@ fprintf('=== Experiment 3: %s\n', desc);
 PTSTParams.L = 3;
 PTSTParams.T = 1;
 PTSTParams.type = 'PTST';
-PoissonPTSTParams = PTSTParams;
-PoissonPTSTParams.type = 'equPoisson';
-s1 = rand('seed'); s2 = randn('seed');
-spikeTrains1 = genPTST(N, M, PTSTParams);
-rand('seed', s1); randn('seed', s2);
+[spikeTrains1, PoissonPTSTParams] = genPTST(N, M, PTSTParams);
+PoissonPTSTParams.type = 'equPoisson'
 spikeTrains2 = genPTST(N, M, PoissonPTSTParams);
 case 4
 desc = 'Renewal vs Serially correlated';

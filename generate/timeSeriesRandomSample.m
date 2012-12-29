@@ -20,6 +20,7 @@ function [subsamples, targets, sts, temporalWindow] = timeSeriesRandomSample(x, 
 
 if nargin < 6; isRandom = true; end
 
+assert(numel(subsampleInterval) == 2, 'interval must be of [a b] form')
 if isRandom
     subsamples = sort(rand(nSubsample, 1) * diff(subsampleInterval) ...
         + subsampleInterval(1));
@@ -29,7 +30,7 @@ else
 end
 
 % estimate required temporal window size
-if nargin < 7
+if nargin < 7 || isempty(temporalWindow)
     temporalWindow = quantile(diff(st), 0.95) * 3; % Also try 5 times :P
 end
 % chop up spike trains and make a regression data set

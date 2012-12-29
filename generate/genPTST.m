@@ -9,8 +9,12 @@ function [spikeTrains param] = genPTST(N, M, param)
 %   param.L: number of PTST events
 %   param.type: 'PTST' or 'equPoisson' (equi-rate Poisson process)
 %
+% Output
+%   spikeTrains: spike trains data structure
+%   param: set of parameters sufficient to change the type
+%
 % $Id: genPTST.m 33 2011-02-01 14:19:01Z memming $
-% Copyright 2010 iocane project. All rights reserved.
+% Copyright 2010 spiketrainlib project. All rights reserved.
 
 % Redistribution and use in source and binary forms, with or without
 % modification, are permitted provided that the following conditions are met:

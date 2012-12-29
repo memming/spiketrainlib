@@ -11,3 +11,4 @@ addpath([base 'visual']);
 addpath([base 'divergence']);
 addpath([base 'metric']);
 addpath([base 'regression']);
+addpath([base 'filtering']);

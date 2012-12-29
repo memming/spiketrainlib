@@ -3,7 +3,7 @@
 % It would be better to compute MMD for each PC direction
 % and display the ones with highests difference.
 
-expNum = 10;
+expNum = 3;
 kernelList = {'mci', 'nci1', 'spikernel'}; %'stratified Poisson scaling';
 
 N = 6 * 32; % number of samples per class (total data = 2*N)
@@ -18,10 +18,14 @@ allsts(idx1) = sts1(1).data(:);
 allsts(idx2) = sts2(1).data(:);
 sts = allsts([idx1(:); idx2(:)]);
 
+%% plot spike trains
 figRaster = figure;
-subplot(1,2,1); plotRaster(sts, [0 0 0], [], false); title(desc);
-subplot(1,2,2); plotRaster(sts, [0 0 0], [], true); title('sorted');
+subplot(2,2,1); plotRaster(sts1.data, [0 0 0], [], false); title(desc);
+subplot(2,2,3); plotRaster(sts2.data, [0 0 0], [], false); title(desc);
+subplot(2,2,2); plotRaster(sts1.data, [0 0 0], [], true); title('sorted');
+subplot(2,2,4); plotRaster(sts2.data, [0 0 0], [], true); title('sorted');
 
+%% 
 figPCA = figure;
 nKernels = length(kernelList);
 
@@ -68,13 +72,9 @@ p1 = sum(d2 > mmd2) / length(d2);
 p2 = 1 - sum(d2 < mmd2) / length(d2);
 p = (p1 + p2) / 2;
 
-[proj, eigVal, eigVec] = KPCA(KM);
-[eigVal, seidx] = sort(eigVal, 'descend');
-eigVec = eigVec(:, seidx);
-proj = proj(:, seidx);
-
-% max dimension (dividing by small eigVal is not numerically stable)
-md = min(N*2, 100); 
+%% max dimension (dividing by small eigVal is not numerically stable)
+md = min(N*2, 100);
+[proj, eigVal, eigVec] = KPCA(KM, md); % sorts internally
 proj = bsxfun(@times, proj(:, 1:md), 1 ./ sqrt(eigVal(1:md))'); % truncate
 
 %% Compute component wise MMD

@@ -9,6 +9,8 @@ function [subsamples, targets, sts, temporalWindow] = timeSeriesRandomSample(x, 
 %   samplingFreq: sampling frequency
 %   nSubsample: number of samples to obtain
 %   subsampleInterval: [start_time end_time]
+%   isRandom: [default true] randomize sampling times (uniformly), if false
+%	    we take samples sequentially
 %   temporalWindow: length of the temporal window to grab the spike trains
 %		    By default, 3 times the 95% quantile of ISI is chosen.
 %

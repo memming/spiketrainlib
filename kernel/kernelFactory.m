@@ -237,6 +237,7 @@ switch lower(kernelName)
 	kernelStruct.name = 'spikernel';
 	kernelStruct.desc = '(Shpigelman et al. NC 2003)';
 	kernelStruct.isPSD = true;
+        kernelStruct.nParams = 5;
 	kernelStruct.isHermitian = true;
 	kernelStruct.isSPD = false; % not known
 	kernelStruct.isShiftInvariant = true;
@@ -280,6 +281,15 @@ switch lower(kernelName)
     case { 'normalized-spike-align-kernel-2', 'normalized-spike-align-kernel-isi', 'normalized-seth2011c', 'n-seth2011c'}
 	kernelStruct = getNormalizedKernel('seth2011c', T, param1, param2);
     	kernelStruct.name = 'Normalized spike alignment kernel ISI';
+    case {'importance'}
+	kernelStruct.name = 'importance';
+	kernelStruct.desc = 'importance kernel';
+	kernelStruct.isPSD = true;
+	kernelStruct.isHermitian = true;
+	kernelStruct.isSPD = false;
+	kernelStruct.isShiftInvariant = false;
+        kernelStruct.kernel = @virspike;
+        kernelStruct.autoParam = @(ks,sts)({1});
     case {'seth2011c'}
 	kernelStruct.name = 'TEMP';
 	kernelStruct.desc = 'TEMP';

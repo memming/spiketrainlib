@@ -13,6 +13,10 @@ tol = 10 * eps;
 assertRange = @(x,y,msg) assert(abs(x-y) < tol, msg);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ks = kernelFactory('importance', T);
+assert(ks.kernel(ks, [], []) == 1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ks = kernelFactory('brbf', T);
 ksizeList = ks.autoParam(ks, sts);
 for cidx = 1:numel(ksizeList)

@@ -289,7 +289,12 @@ switch lower(kernelName)
 	kernelStruct.isSPD = false;
 	kernelStruct.isShiftInvariant = false;
         kernelStruct.kernel = @virspike;
+        kernelStruct.nParams = 0;
         kernelStruct.autoParam = @(ks,sts)({1});
+    case {'normalized-importance'}
+	kernelStruct = getNormalizedKernel('importance', T, param1, param2);
+	kernelStruct.name = 'n-importance';
+	kernelStruct.desc = 'Normalized importance kernel';
     case {'seth2011c'}
 	kernelStruct.name = 'TEMP';
 	kernelStruct.desc = 'TEMP';
@@ -312,6 +317,8 @@ function [kernelStruct] = getNormalizedKernel(kernelName, T, param1, param2)
 % k(x,y) = k'(x,y) / sqrt( k(x,x) * k(y,y) )
 kernelStruct = kernelFactory(kernelName, T, param1, param2);
 kOriginal = kernelStruct.kernel;
+%normalizeKernel = @(KM)(KM ./ sqrt(diag(KM)*diag(KM)'));
+%kernelStruct.kernel = @(ks,x,y,ksize) normalizeKernel(kOriginal(ks,x,y,ksize));
 kernelStruct.kernel = @(ks,x,y,ksize) (kOriginal(ks,x,y,ksize) / sqrt(kOriginal(ks,x,x,ksize) * kOriginal(ks,y,y,ksize)));
 kernelStruct.normalizeKM = true;
 end
